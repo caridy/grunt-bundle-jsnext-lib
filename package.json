@@ -1,0 +1,44 @@
+{
+  "name": "grunt-bundle-jsnext-lib",
+  "description": "Grunt plugin to bundle ES6 Modules and their dependencies into a library for Browsers and CommonJS.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/caridy/grunt-bundle-jsnext-lib",
+  "author": {
+    "name": "Caridy Patino",
+    "email": "caridy@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/caridy/grunt-bundle-jsnext-lib.git"
+  },
+  "bugs": {
+    "url": "https://github.com/caridy/grunt-bundle-jsnext-lib/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/caridy/grunt-bundle-jsnext-lib/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": "0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5",
+    "es6-module-transpiler": "^0.5.1",
+    "es6-module-transpiler-npm-resolver": "0.0.1",
+    "recast": "^0.5.27"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
