@@ -20,9 +20,6 @@
       "url": "https://github.com/caridy/grunt-bundle-jsnext-lib/blob/master/LICENSE-MIT"
     }
   ],
-  "engines": {
-    "node": "0.10.0"
-  },
   "scripts": {
     "test": "grunt test"
   },
