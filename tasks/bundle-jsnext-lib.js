@@ -39,20 +39,19 @@ module.exports = function(grunt) {
       formatter: new FormatterClass(),
       resolvers: resolvers
     });
-    var code, outputs,
-      filepath = pkg && pkg["jsnext:main"];
 
+    var filepath = pkg && pkg["jsnext:main"];
     if (!filepath) {
       grunt.fatal('Missing `jsnext:main` value in ' + libpath.resolve('./package.json'));
       return;
     }
-
     // Warn on and remove invalid source files (if nonull was set).
     if (!grunt.file.exists(filepath)) {
       grunt.log.warn('Source file "' + filepath + '" not found.');
       return;
     }
 
+    var code, outputs;
     try {
       container.umdDepedency = filepath;
       container.umdNamespace = config.namespace;
@@ -64,9 +63,9 @@ module.exports = function(grunt) {
       return;
     }
 
-    grunt.file.write(this.data, code, { encoding: 'utf8' });
-    grunt.log.ok('Bundled library written in ' + this.data);
-
+    var dest = (this.data && this.data.dest) || this.data;
+    grunt.file.write(dest, code, { encoding: 'utf8' });
+    grunt.log.ok('Bundled library written in ' + dest);
   });
 
 };

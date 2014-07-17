@@ -32,13 +32,13 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     bundle_jsnext: {
       default_options: {
-        dest: 'tmp/default_options'
+        dest: 'tmp/default_options.js'
       },
       custom_options: {
         options: {
           namespace: 'foo.bar.baz'
         },
-        dest: 'tmp/custom_options'
+        dest: 'tmp/custom_options.js'
       }
     },
 

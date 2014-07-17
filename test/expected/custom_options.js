@@ -1,0 +1,15 @@
+(function() {
+    "use strict";
+
+    var test$fixtures$main$$default = function () {
+      return 'yay!';
+    };
+
+    if (typeof define === 'function' && define.amd) {
+      define(function() { return test$fixtures$main$$default; });
+    } else if (typeof module !== 'undefined' && module.exports) {
+      module.exports = test$fixtures$main$$default;
+    } else if (typeof this !== 'undefined') {
+      this['foo']['bar']['baz'] = test$fixtures$main$$default;
+    }
+}).call(this);
