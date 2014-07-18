@@ -36,7 +36,9 @@ module.exports = function(grunt) {
       },
       custom_options: {
         options: {
-          namespace: 'foo.bar.baz'
+          namespace: 'foo.bar.baz',
+          namedExport: 'foo',
+          main: 'test/fixtures/other.js',
         },
         dest: 'tmp/custom_options.js'
       }

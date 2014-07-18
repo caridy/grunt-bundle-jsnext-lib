@@ -29,7 +29,9 @@ module.exports = function(grunt) {
       pkg = require(libpath.resolve('./package.json'));
     }
     var config = this.options({
-      namespace: pkg && pkg.name
+      namespace: pkg && pkg.name,
+      main: pkg && pkg["jsnext:main"],
+      namedExport: 'default'
     });
 
     var resolvers = resolverClasses.map(function(ResolverClass) {
@@ -40,7 +42,7 @@ module.exports = function(grunt) {
       resolvers: resolvers
     });
 
-    var filepath = pkg && pkg["jsnext:main"];
+    var filepath = config.main;
     if (!filepath) {
       grunt.fatal('Missing `jsnext:main` value in ' + libpath.resolve('./package.json'));
       return;
@@ -55,6 +57,7 @@ module.exports = function(grunt) {
     try {
       container.umdDepedency = filepath;
       container.umdNamespace = config.namespace;
+      container.umdNamedExport = config.namedExport;
       container.getModule("umd-wrapper");
       outputs = container.convert();
       code = recast.print(outputs[0]).code;

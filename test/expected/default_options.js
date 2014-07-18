@@ -2,7 +2,7 @@
     "use strict";
 
     var test$fixtures$main$$default = function () {
-      return 'yay!';
+      return 'print main';
     };
 
     if (typeof define === 'function' && define.amd) {

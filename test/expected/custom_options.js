@@ -1,15 +1,15 @@
 (function() {
     "use strict";
 
-    var test$fixtures$main$$default = function () {
-      return 'yay!';
-    };
+    function test$fixtures$other$$foo() {
+      return 'print other';
+    }
 
     if (typeof define === 'function' && define.amd) {
-      define(function() { return test$fixtures$main$$default; });
+      define(function() { return test$fixtures$other$$foo; });
     } else if (typeof module !== 'undefined' && module.exports) {
-      module.exports = test$fixtures$main$$default;
+      module.exports = test$fixtures$other$$foo;
     } else if (typeof this !== 'undefined') {
-      this['foo']['bar']['baz'] = test$fixtures$main$$default;
+      this['foo']['bar']['baz'] = test$fixtures$other$$foo;
     }
 }).call(this);

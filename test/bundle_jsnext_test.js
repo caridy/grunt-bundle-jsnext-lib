@@ -1,6 +1,7 @@
 'use strict';
 
 var grunt = require('grunt');
+var path = require('path');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -26,13 +27,23 @@ exports.bundle_jsnext_lib = {
   default_options: function(test) {
     var actual = grunt.file.read('tmp/default_options.js');
     var expected = grunt.file.read('test/expected/default_options.js');
-    test.equal(actual.toString(), expected.toString(), 'should use the package name as the namespace.');
+    test.equal(actual, expected, 'should use the package name as the namespace.');
     test.done();
   },
   custom_options: function(test) {
     var actual = grunt.file.read('tmp/custom_options.js');
     var expected = grunt.file.read('test/expected/custom_options.js');
     test.equal(actual, expected, 'should use the custom namespace `foo.bar.baz` instead of the package name.');
+    test.done();
+  },
+  main_node_module: function(test) {
+    var main = require(path.resolve('./tmp/default_options.js'));
+    test.equal(main(), 'print main', 'should export the `default` member from main.js.');
+    test.done();
+  },
+  other_node_module: function(test) {
+    var other = require(path.resolve('./tmp/custom_options.js'));
+    test.equal(other(), 'print other', 'should export member `other` from main.js.');
     test.done();
   },
 };
