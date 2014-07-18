@@ -24,6 +24,7 @@
   "scripts": {
     "test": "grunt test"
   },
+  "files": ["lib/", "tasks/"],
   "dependencies": {
     "es6-module-transpiler": "^0.5.1",
     "es6-module-transpiler-npm-resolver": "0.0.1",
