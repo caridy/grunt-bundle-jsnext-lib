@@ -62,7 +62,7 @@ Default value: the `jsnext:main` value from the  `package.json` in your project.
 
 A string value that is used as the path to the source of the ES6 module that should be exported.
 
-_Note: the encourage people rely on `jsnext:main`, as the standard way of pointing to the main module written in a format that is still not supported in the current javascript engines, and requires some transpilation, so this value can be used by other tools as well._
+_Note: you should rely on `jsnext:main` as the standard way of pointing to the main module written in a format that is still not supported in the current javascript engines, and requires some transpilation, so this value can be used by other tools as well._
 
 #### options.namedExport
 Type: `String`
