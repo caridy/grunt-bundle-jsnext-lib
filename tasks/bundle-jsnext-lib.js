@@ -53,22 +53,24 @@ module.exports = function(grunt) {
       return;
     }
 
-    var code, outputs;
     try {
       container.umdDepedency = filepath;
       container.umdNamespace = config.namespace;
       container.umdNamedExport = config.namedExport;
       container.getModule("umd-wrapper");
-      outputs = container.convert();
-      code = recast.print(outputs[0]).code;
     } catch (err) {
       grunt.fatal('Error converting ES6 modules: ' + err);
       return;
     }
 
     var dest = (this.data && this.data.dest) || this.data;
-    grunt.file.write(dest, code, { encoding: 'utf8' });
-    grunt.log.ok('Bundled library written in ' + dest);
+    try {
+      container.write(dest);
+      grunt.log.ok('Bundled library written in ' + dest);
+    } catch (err) {
+      grunt.fatal('Error writing bundle in "' + dest + '": ' + err);
+      return;
+    }
   });
 
 };

@@ -13,3 +13,5 @@
       this['grunt-bundle-jsnext-lib'] = test$fixtures$main$$default;
     }
 }).call(this);
+
+//# sourceMappingURL=default_options.js.map
