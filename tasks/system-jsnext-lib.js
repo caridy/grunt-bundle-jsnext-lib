@@ -10,7 +10,7 @@ var resolverClasses = [FileResolver, NPMFileResolver];
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('system_jsnext', 'Grunt plugin to bundle ES6 Modules into a library for CommonJS.', function() {
+  grunt.registerMultiTask('system_jsnext', 'Grunt plugin to bundle ES6 Modules into a library for System.register.', function() {
     var pkg;
     if (!grunt.file.exists('./package.json')) {
       grunt.log.warn('package.json not found.');
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
     try {
       grunt.file.mkdir(dest);
       container.write(dest);
-      grunt.log.ok('`System.register()` transpiled library written in ' + dest);
+      grunt.log.ok('System.register library written in ' + dest);
     } catch (err) {
       grunt.fatal('Error writing library in "' + dest + '": ' + err);
       return;

@@ -12,7 +12,7 @@ var resolverClasses = [FileResolver, UMDWrapperResolver, NPMFileResolver];
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('bundle_jsnext', 'Grunt plugin to bundle ES6 Modules into a library for Browsers and CommonJS.', function() {
+  grunt.registerMultiTask('bundle_jsnext', 'Grunt plugin to bundle ES6 Modules into a library for Browsers.', function() {
     var pkg;
     if (!grunt.file.exists('./package.json')) {
       grunt.log.warn('package.json not found.');
