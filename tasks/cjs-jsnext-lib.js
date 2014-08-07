@@ -63,7 +63,7 @@ module.exports = function(grunt) {
     try {
       grunt.file.mkdir(dest);
       container.write(dest);
-      grunt.log.ok('`System.register()` transpiled library written in ' + dest);
+      grunt.log.ok('CommonJS library written in ' + dest);
     } catch (err) {
       grunt.fatal('Error writing library in "' + dest + '": ' + err);
       return;
