@@ -24,11 +24,15 @@
   "scripts": {
     "test": "grunt test"
   },
-  "files": ["lib/", "tasks/"],
+  "files": [
+    "lib/",
+    "tasks/"
+  ],
   "dependencies": {
     "es6-module-transpiler": "^0.6.0",
     "es6-module-transpiler-npm-resolver": "~0.0.2",
-    "recast": "^0.6.7"
+    "recast": "^0.6.7",
+    "es6-module-transpiler-system-formatter": "^0.1.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "^0.9.2",

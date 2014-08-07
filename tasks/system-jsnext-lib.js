@@ -2,17 +2,15 @@
 
 var libpath = require('path');
 var recast = require('recast');
-var formatters = require('es6-module-transpiler/lib/formatters');
 var Container = require('es6-module-transpiler/lib/container');
-var NPMFileResolver = require('es6-module-transpiler-npm-resolver');
-var UMDWrapperResolver = require('../lib/global-resolver');
+var NPMFileResolver = require('../lib/npm-resolver');
 var FileResolver = require('es6-module-transpiler/lib/file_resolver');
-var FormatterClass = formatters[formatters.DEFAULT];
-var resolverClasses = [FileResolver, UMDWrapperResolver, NPMFileResolver];
+var FormatterClass = require('es6-module-transpiler-system-formatter');
+var resolverClasses = [FileResolver, NPMFileResolver];
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('bundle_jsnext', 'Grunt plugin to bundle ES6 Modules into a library for Browsers and CommonJS.', function() {
+  grunt.registerMultiTask('system_jsnext', 'Grunt plugin to bundle ES6 Modules into a library for CommonJS.', function() {
     var pkg;
     if (!grunt.file.exists('./package.json')) {
       grunt.log.warn('package.json not found.');
@@ -21,12 +19,10 @@ module.exports = function(grunt) {
       pkg = require(libpath.resolve('./package.json'));
     }
     var config = this.options({
-      namespace: pkg && pkg.name,
-      main: pkg && pkg["jsnext:main"],
-      namedExport: 'default'
+      main: pkg && pkg["jsnext:main"]
     });
 
-    var resolvers = resolverClasses.map(function(ResolverClass) {
+    var resolvers = [FileResolver, NPMFileResolver].map(function(ResolverClass) {
       return new ResolverClass([libpath.resolve('./')]);
     });
     var container = new Container({
@@ -46,21 +42,29 @@ module.exports = function(grunt) {
     }
 
     try {
-      container.globalDepedency = filepath;
-      container.globalNamespace = config.namespace;
-      container.globalNamedExport = config.namedExport;
-      container.getModule("global-wrapper");
+      container.getModule(filepath);
+      container.convert();
+      container.findImportedModules();
     } catch (err) {
       grunt.fatal('Error converting ES6 modules: ' + err);
       return;
     }
 
+    Object.keys(container.modules).forEach(function (src) {
+      var external = container.modules[src].external;
+      delete container.modules[src];
+      if (!external) {
+        container.getModule(src.slice(libpath.resolve('./').length + 1));
+      }
+    });
+
     var dest = (this.data && this.data.dest) || this.data;
     try {
+      grunt.file.mkdir(dest);
       container.write(dest);
-      grunt.log.ok('Bundled library written in ' + dest);
+      grunt.log.ok('`System.register()` transpiled library written in ' + dest);
     } catch (err) {
-      grunt.fatal('Error writing bundle in "' + dest + '": ' + err);
+      grunt.fatal('Error writing library in "' + dest + '": ' + err);
       return;
     }
   });

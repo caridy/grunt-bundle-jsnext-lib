@@ -36,11 +36,37 @@ module.exports = function(grunt) {
       },
       custom_options: {
         options: {
-          namespace: 'foo.bar.baz',
+          namespace: 'foobarbaz',
           namedExport: 'foo',
           main: 'test/fixtures/other.js',
         },
         dest: 'tmp/custom_options.js'
+      }
+    },
+
+    // Configuration to be run (and then tested).
+    system_jsnext: {
+      default_options: {
+        dest: 'tmp/system_default/'
+      },
+      custom_options: {
+        options: {
+          main: 'test/fixtures/other.js',
+        },
+        dest: 'tmp/system_custom/'
+      }
+    },
+
+    // Configuration to be run (and then tested).
+    cjs_jsnext: {
+      default_options: {
+        dest: 'tmp/cjs_default/'
+      },
+      custom_options: {
+        options: {
+          main: 'test/fixtures/other.js',
+        },
+        dest: 'tmp/cjs_custom/'
       }
     },
 
