@@ -1,7 +1,6 @@
 'use strict';
 
 var libpath = require('path');
-var recast = require('recast');
 var formatters = require('es6-module-transpiler/lib/formatters');
 var Container = require('es6-module-transpiler/lib/container');
 var NPMFileResolver = require('../lib/npm-resolver');
