@@ -1,10 +1,8 @@
 # grunt-bundle-jsnext-lib
 
-Grunt plugin to bundle a ES6 Module and its dependencies into a library that can be used today in  a browser, or thru AMD and CommonJS.
+Grunt plugin to build libraries written using ES6 Modules. The library can depend on other similar libraries, and can be build for browsers and nodejs.
 
-This plugin allow you to write your library as a collection of ES6 modules, define an entry point to that collection of modules that will be used to transpile the modules into a single file that implements UMD format to use it today in any module system.
-
-As a result, you will have an NPM module that can work in nodejs, with browserify, with AMD, or simply as a global script in a browser.
+This plugin allow you to write your library as a collection of ES6 modules, define an entry point to that collection of modules that will be used to transpile the modules into a single file exporting a global namespace to use it in a browser as a global script. It can also transpile the modules into CommonJS to use it in nodejs.
 
 This plugin relies on [es6-module-transpiler][] transpile the modules into bundles.
 
@@ -31,20 +29,30 @@ grunt.loadNpmTasks('grunt-bundle-jsnext-lib');
 ## The "bundle_jsnext" task
 
 ### Overview
-In your project's Gruntfile, add a section named `bundle_jsnext` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `bundle_jsnext` and/or `cjs_jsnext` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
   bundle_jsnext: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific destination and/or options go here.
-    },
+    library: {
+      options: {
+        namespace: 'MyLibrary'
+      },
+      dest: 'dist/library.js'
+    }
+  },
+  cjs_jsnext: {
+    library: {
+      options: {
+        main: 'src/main.js',
+      },
+      dest: 'lib/'
+    }
   },
 });
 ```
+
+Both tasks support the same options, the only difference is in the `dest` value. For `bundle` format output, a destination file is required, while for `cjs`, a destination folder is required.
 
 ### Options
 
@@ -53,8 +61,6 @@ Type: `String`
 Default value: the `name` value from the  `package.json` in your project.
 
 A string value that is used to expose the entry point module into a global script for browsers. (e.g.: `window.IntlMessageFormat` for `intl-messageformat` package.)
-
-You can use multiple levels for this namespace, for example: `Foo.Bar-baz`, which will define `window.Foo["Bar-baz"]` as the way to access the exported values.
 
 #### options.main
 Type: `String`
@@ -68,23 +74,23 @@ _Note: you should rely on `jsnext:main` as the standard way of pointing to the m
 Type: `String`
 Default value: `default`
 
-A string value that is used to specify the named export that should be exported into the namespace, into `module.exports` and thru `define()`. By default, it will use the ES6 default export.
+A string value that is used to specify the named export that should be exported into the namespace, and into `module.exports`. By default, it will use the ES6 default export of the module specified thru `options.main`.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used, which means the package name will be used as the `namespace`, and the value of `jsnext:main` in the `package.json` will be used as the entry point. As a result, the bundle with the transpiled modules is going to be written into `dest/my-library.js`.
+In this example, the default options are used, which means the package name will be used as the `namespace`, and the value of `jsnext:main` in the `package.json` will be used as the entry point. As a result, the bundle with the transpiled modules is going to be written into `dest/library.js`.
 
 ```js
 grunt.initConfig({
   bundle_jsnext: {
-    dest: 'dest/my-library.js',
+    dest: 'dest/library.js',
   },
 });
 ```
 
 #### Custom Options
-In this example, a custom namespace, and a custom entry point are provided. As a result, the bundle with the transpiled module `main-module`, and its dependencies is going to be written into `dest/my-library.js`.
+In this example, a custom namespace, and a custom entry point are provided. As a result, the bundle with the transpiled module `main-module`, and its dependencies is going to be written into `dest/library.js`.
 
 __Please, stick to the default options :), seriously.__
 
@@ -92,11 +98,11 @@ __Please, stick to the default options :), seriously.__
 grunt.initConfig({
   bundle_jsnext: {
     options: {
-      namespace: 'Foo.Bar',
-      namedExport: 'foo',
-      main: 'path/to/entry/point/custom-module.js',
+      namespace: 'MyLibrary',
+      namedExport: 'default',
+      main: 'path/to/entry/point/main-module.js',
     },
-    dest: 'dest/custom-module.js',
+    dest: 'dest/library.js',
   },
 });
 ```
