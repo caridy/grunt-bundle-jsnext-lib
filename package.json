@@ -1,7 +1,7 @@
 {
   "name": "grunt-bundle-jsnext-lib",
   "description": "Grunt plugin to bundle ES6 Modules and their dependencies into a library for Browsers and CommonJS.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "homepage": "https://github.com/caridy/grunt-bundle-jsnext-lib",
   "author": {
     "name": "Caridy Patino",
@@ -29,17 +29,18 @@
     "tasks/"
   ],
   "dependencies": {
-    "es6-module-transpiler": "^0.6.0",
-    "es6-module-transpiler-npm-resolver": "0.0.2",
-    "es6-module-transpiler-system-formatter": "^0.1.1",
-    "esprima": "git://github.com/esnext/esprima#harmony-esnext",
-    "recast": "^0.6.10"
+    "es6-module-transpiler": "~0.8.2",
+    "es6-module-transpiler-npm-resolver": "~0.0.2",
+    "es6-module-transpiler-system-formatter": "~0.2.0",
+    "esprima-fb": "^7001.1.0-dev-harmony-fb",
+    "recast": "~0.8.0"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-nodeunit": "^0.4.1"
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-mkdir": "^0.1.2"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
