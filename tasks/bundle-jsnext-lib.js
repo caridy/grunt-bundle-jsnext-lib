@@ -55,6 +55,12 @@ module.exports = function(grunt) {
     }
 
     var dest = (this.data && this.data.dest) || this.data;
+    var destIsFile = libpath.extname(dest) === '.js';
+    if (!destIsFile) {
+      grunt.fatal('Destination (dest) should be a javascript file instead of "' + dest + '"');
+    }
+
+    grunt.file.mkdir(libpath.dirname(dest));
     try {
       container.write(dest);
       grunt.log.ok('Bundled library written in ' + dest);

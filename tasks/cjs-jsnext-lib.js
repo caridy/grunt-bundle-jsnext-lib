@@ -59,8 +59,8 @@ module.exports = function(grunt) {
     });
 
     var dest = (this.data && this.data.dest) || this.data;
+    grunt.file.mkdir(dest);
     try {
-      grunt.file.mkdir(dest);
       container.write(dest);
       grunt.log.ok('CommonJS library written in ' + dest);
     } catch (err) {
