@@ -80,7 +80,7 @@ A string value that is used to specify the named export that should be exported 
 Type: `String`
 Default value: `process.cwd()`
 
-A string path used to resolve transpiled modules' source path against. The resolved path will then serve as the `sourceMapName` value for the module in the bundled output file's source map.
+A string path used to resolve the transpiled modules' source paths against. The resolved path will then serve as the `sourceFileName` value for the module in the bundled output file's source map.
 
 #### options.sourceRoot
 Type: `String`
