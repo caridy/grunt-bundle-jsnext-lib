@@ -33,7 +33,7 @@
     "es6-module-transpiler-npm-resolver": "~0.2.0",
     "es6-module-transpiler-system-formatter": "~0.2.1",
     "esprima-fb": "^7001.1.0-dev-harmony-fb",
-    "recast": "~0.8.0"
+    "recast": "^0.9.5"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
