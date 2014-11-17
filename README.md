@@ -76,6 +76,18 @@ Default value: `default`
 
 A string value that is used to specify the named export that should be exported into the namespace, and into `module.exports`. By default, it will use the ES6 default export of the module specified thru `options.main`.
 
+#### options.basePath
+Type: `String`
+Default value: `process.cwd()`
+
+A string path used to resolve the transpiled modules' source paths against. The resolved path will then serve as the `sourceFileName` value for the module in the bundled output file's source map.
+
+#### options.sourceRoot
+Type: `String`
+Default value: `"/"`
+
+A string path to use as the `sourceRoot` value in the bundled output file's source map.
+
 ### Usage Examples
 
 #### Default Options

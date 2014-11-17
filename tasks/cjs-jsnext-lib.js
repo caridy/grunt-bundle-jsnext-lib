@@ -27,7 +27,9 @@ module.exports = function(grunt) {
     });
     var container = new Container({
       formatter: new FormatterClass(),
-      resolvers: resolvers
+      resolvers: resolvers,
+      basePath: config.basePath,
+      sourceRoot: config.sourceRoot
     });
 
     var filepath = config.main;
